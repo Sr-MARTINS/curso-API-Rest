@@ -33,20 +33,15 @@ class ProductsController extends Controller
         return response()->json($product);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    
+    public function save(Request $request)
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
+        $product = $this->model->create($request->all());
+        
+        return response()->json([
+            'message' => "Produto cadastrado com success",
+            'praduct' => $product
+        ], 200);
     }
 
     /**
@@ -58,19 +53,15 @@ class ProductsController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $product = $this->model->find($id);
+     
+        $product = $this->model->update($request->all());
+        
+        return response()->json(['message' => "Produto atualizado"]);
     }
 
     /**
@@ -78,6 +69,9 @@ class ProductsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $product = $this->model->find($id);
+        $product->delete();
+
+        return response()->json(['message' => 'Produo deletado']);
     }
 }

@@ -17,3 +17,7 @@ Route::get('/test', function (Request $request) {
 
 
 Route::get('/products', [ProductsController::class, 'index']);
+Route::post('/products/create', [ProductsController::class, 'save']);
+Route::put('/products/update/{id}', [ProductsController::class, 'update']);
+Route::delete('/products/delete/{id}', [ProductsController::class, 'destroy']);
+
